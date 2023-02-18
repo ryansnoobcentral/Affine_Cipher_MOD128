@@ -1,6 +1,8 @@
 package PA01.Cryptography;
 
 import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Used to do the decryption of an Affine_Cipher file.
@@ -23,22 +25,74 @@ public class Decryption {
     }
 
     /**
-     * Holds the decryption algo. **Formula** - D = (a^-1(m - b) mod 128) + 128.
+     * Holds the decryption algo. **Formula** - D = (a^-1(m - b) mod 128).
+     *
+     * @return byte[] of decrypted bytes
      */
-    public byte[] decryptionAlgo() {
+    public byte[] decryption_algo() {
         // to make sure fully_decrypted is not populated
         fully_decrypted = new byte[affine.getAscII_values().length];
         // gets the inverse of "a" from the BigInteger class method of modInverse
-        int a_inverse = affine.getA().modInverse(new BigInteger(String.valueOf(affine.MOD_128))).intValue();
-        System.out.println(a_inverse);
+        int a_inverse = affine.getKeyPair().a.modInverse(new BigInteger(String.valueOf(affine.MOD_128))).intValue();
         int i = 0;
         for (byte cur : affine.getAscII_values()) {
-            // This algo used is inverse from what encryption method is doing, but we end up getting a negative number
-            // mod 128.  So, to counteract the negative number, I add 128 back to the final value.  This always gets me
-            // back to a positive number of mod 128 and the correct decrypted bytes.  After testing, this was the
-            // correct solution to my problem.
-            fully_decrypted[i++] = (byte) (((a_inverse * (cur - affine.getB().intValue())) % affine.MOD_128) + 128);
+            // The algo used is inverse from what the encryption method was doing, but I end up getting a negative
+            // number mod 128 if not using the conversion to an unsigned long.  The unsigned value allows our number to
+            // be strictly positive 0 - 255 instead of -127 - 128.  Anyhow, if I did not use the trick of using
+            // unsigned.  Then to counteract the negative number, I add 128 back to the final value.  However, I would
+            // still have to handle an edge case, which is when I obtain zero, and I do not add back the 128.  This
+            // would always get me back to a positive number of mod 128 and the correct decrypted bytes.
+            fully_decrypted[i++] = (byte) (Integer.toUnsignedLong((a_inverse *
+                    (cur - affine.getKeyPair().b.intValue()))) % 128);
         }
         return fully_decrypted;
     }
+
+    /***
+     * Holds the method for brute forcing a key set.
+     * <p>This is the ugliest code I've written in a while, forgive me.</p>
+     */
+    public void decryption_brute_force_key() {
+        // Ultimately this will generate the best key
+        int legible_words;
+        int max_legible_words = 0;
+        KeyPair bestPair = new KeyPair(null, null);
+        ArrayList<String> curBinaryStringRep;
+        for (int i = 0; i < affine.MOD_128; i++) {
+            // Checks if the value of "i" is relatively prime to 128
+            if (new BigInteger("" + i).gcd(new BigInteger("" + affine.MOD_128)).intValue() == 1) {
+                // gets the inverse of "i" mod 128 from the BigInteger class method of modInverse
+                for (int j = 0; j < affine.MOD_128; j++) {
+                    legible_words = 0;
+                    // updates big integers each iteration
+                    affine.getKeyPair().setKeyPair(new BigInteger("" + i), new BigInteger("" + j));
+                    // updates the decryption each iteration
+                    fully_decrypted = decryption_algo();
+                    // updates the strings of bits to compare
+                    curBinaryStringRep = affine.create_binary_lines(fully_decrypted, 1);
+                    // compares both current string representation of binary to library
+                    for (int k = 0; k < curBinaryStringRep.size(); k++) {
+                        for (String cur : curBinaryStringRep) {
+                            if (cur.contains(affine.getDictionary_values().get(k))) {
+                                legible_words++;
+//                                System.out.printf("True for bytes: %s\n", affine.getDictionary_values().get(k));
+//                                System.out.printf("A = %d\tB = %d\n", affine.getKeyPair().a, affine.getKeyPair().b);
+                            }
+                        }
+                        // TODO finish, almost complete NEED TO FIX
+                    }
+                    // If the words found is greater than max already
+                    if (legible_words > max_legible_words) {
+                        max_legible_words = legible_words;
+                        bestPair = new KeyPair(new BigInteger("" + i), new BigInteger("" + j));
+                    }
+                }
+            }
+        }
+        affine.getKeyPair().setKeyPair(bestPair.a, bestPair.b);
+        System.out.printf("A = %d\tB = %d\n", bestPair.a, bestPair.b);
+        System.out.println(max_legible_words);
+    }
 }
+
+

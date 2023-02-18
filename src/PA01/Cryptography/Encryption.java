@@ -22,16 +22,17 @@ public class Encryption {
 
     /**
      * Holds the encryption algo. **Formula** - E = (a · m + b) mod 128.
+     *
+     * @return byte[] of encrypted bytes
      */
-    public byte[] encryptionAlgo() {
+    public byte[] encryption_algo() {
         // to make sure fully_encrypted is not populated
         fully_encrypted = new byte[affine.getAscII_values().length];
         // encryption process
         int i = 0;
         for (byte cur : affine.getAscII_values()) {
-//            System.out.println("This is cur" + cur);
-            fully_encrypted[i++] = (byte) ((affine.getA().intValue() * cur + affine.getB().intValue()) % affine.MOD_128);
-//            System.out.println("This is after" + fully_encrypted[i - 1]);
+            fully_encrypted[i++] = (byte) ((affine.getKeyPair().a.intValue() * cur + affine.getKeyPair().b.intValue())
+                    % affine.MOD_128);
         }
         return fully_encrypted;
     }

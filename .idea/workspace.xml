@@ -4,22 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3078e577-3851-4046-b36f-1bf968bd6159" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/checkstyle-idea.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/CS327 Coding Projects.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Affine.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Decryption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Encryption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testIN.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testOUT.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/testOUTreverted.txt" afterDir="false" />
+    <list default="true" id="3078e577-3851-4046-b36f-1bf968bd6159" name="Changes" comment="encryption and decryption are completed.">
+      <change afterPath="$PROJECT_DIR$/all_characters.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/PA01/Cryptography/KeyPair.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/words.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PA01/Cryptography/Affine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Affine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PA01/Cryptography/Decryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Decryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PA01/Cryptography/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Encryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testOUT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testOUT.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,24 +33,29 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2LQfujyI3nIANgH8P6YaWs9o25h" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/ryan/OneDrive/Documents/GitHub/CS327 Coding Projects&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ryan/OneDrive/Documents/GitHub/CS327 Coding Projects/testOUTreverted.txt&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;,
+    &quot;two.files.diff.last.used.file&quot;: &quot;C:/Users/ryan/OneDrive/Documents/GitHub/CS327 Coding Projects/testOUTreverted.txt&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -70,7 +68,7 @@
     <configuration name="Affine" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="PA01.Cryptography.Affine" />
       <module name="CS327 Coding Projects" />
-      <option name="PROGRAM_PARAMETERS" value="decrypt testOUT.txt testOUTreverted.txt 51 123456" />
+      <option name="PROGRAM_PARAMETERS" value="decipher testOUT.txt testOUTreverted.txt words.txt" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="PA01.Cryptography.*" />
@@ -105,8 +103,23 @@
       <workItem from="1676007713438" duration="6906000" />
       <workItem from="1676061584360" duration="903000" />
       <workItem from="1676064098820" duration="6805000" />
-      <workItem from="1676084305564" duration="941000" />
+      <workItem from="1676084305564" duration="1309000" />
+      <workItem from="1676086062620" duration="32000" />
+      <workItem from="1676095404864" duration="591000" />
+      <workItem from="1676231248441" duration="1869000" />
+      <workItem from="1676234484351" duration="2369000" />
+      <workItem from="1676237552929" duration="104000" />
+      <workItem from="1676600076426" duration="14175000" />
+      <workItem from="1676696274203" duration="1060000" />
     </task>
+    <task id="LOCAL-00001" summary="encryption and decryption are completed.">
+      <created>1676085704231</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1676085704231</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,5 +135,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="encryption and decryption are completed." />
+    <option name="LAST_COMMIT_MESSAGE" value="encryption and decryption are completed." />
   </component>
 </project>
