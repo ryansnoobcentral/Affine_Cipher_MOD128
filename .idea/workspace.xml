@@ -4,15 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3078e577-3851-4046-b36f-1bf968bd6159" name="Changes" comment="encryption and decryption are completed.">
-      <change afterPath="$PROJECT_DIR$/all_characters.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/PA01/Cryptography/KeyPair.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/words.txt" afterDir="false" />
+    <list default="true" id="3078e577-3851-4046-b36f-1bf968bd6159" name="Changes" comment="Almost done, just need to fix the decipher to work correctly">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PA01/Cryptography/Affine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Affine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/PA01/Cryptography/Decryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Decryption.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PA01/Cryptography/Encryption.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PA01/Cryptography/Encryption.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testIN.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testIN.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testOUT.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testOUT.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testOUTreverted.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testOUTreverted.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="Enum" />
       </list>
     </option>
   </component>
@@ -110,7 +109,7 @@
       <workItem from="1676234484351" duration="2369000" />
       <workItem from="1676237552929" duration="104000" />
       <workItem from="1676600076426" duration="14175000" />
-      <workItem from="1676696274203" duration="1060000" />
+      <workItem from="1676696274203" duration="12382000" />
     </task>
     <task id="LOCAL-00001" summary="encryption and decryption are completed.">
       <created>1676085704231</created>
@@ -119,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1676085704231</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Almost done, just need to fix the decipher to work correctly">
+      <created>1676697513269</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1676697513269</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +145,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="encryption and decryption are completed." />
-    <option name="LAST_COMMIT_MESSAGE" value="encryption and decryption are completed." />
+    <MESSAGE value="Almost done, just need to fix the decipher to work correctly" />
+    <option name="LAST_COMMIT_MESSAGE" value="Almost done, just need to fix the decipher to work correctly" />
   </component>
 </project>

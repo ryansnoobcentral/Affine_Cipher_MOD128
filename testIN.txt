@@ -1,12 +1,3 @@
-On this particular test, I ran into some issues.  The first issue I discovered was that I was switching to standard
-Merge Sort when Quick Sorts depth reached 2(logN) and not Merge Sort Adaptive (This is now fixed).  Secondly, I found
-a significant issue inside my Merge Sort Adaptive that caused me to go back and re-test everything dealing with it.  The
- issue was that I was initiating the length of the Merge Sort Adaptive temporary array to the actual length of the
- original array (This is now fixed as well).  Lastly, I discovered that my switching statement was weird and might have
- to do with how I counted recursion depth.  To counter this, I started the recursion depth count at -1, and it ended up
- increasing the speed of the Introspective sort by 1/4th.  Anyhow, the purpose of this analysis section was to compare
- the modified Quick Sort (Introspective Sort) vs. the regular Quick Sort.  As we can see in the graph above, the regular
- Quick Sort is still faster with random inputs when using the Introspective Sort switching at a depth of 2(logn), and
- the Introspective Sort is faster than the regular Merge Sort.  However, in the following analysis section, we will see
- the real purpose of the Introspective Sort, and I have gone ahead and shown that switching at a depth of 3(logn) is
- 100% better.
+I believe you can tell the difference between these two types of statements because a statement that requires only a
+counter-example will indefinitely be true/false.  However, a statement that indefinitely cannot be proven true/false
+with a counter-example has the possibility of becoming true/false in the future upon further observation.

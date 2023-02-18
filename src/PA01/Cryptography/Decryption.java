@@ -59,6 +59,7 @@ public class Decryption {
         KeyPair bestPair = new KeyPair(null, null);
         ArrayList<String> curBinaryStringRep;
         for (int i = 0; i < affine.MOD_128; i++) {
+            System.out.println(i);
             // Checks if the value of "i" is relatively prime to 128
             if (new BigInteger("" + i).gcd(new BigInteger("" + affine.MOD_128)).intValue() == 1) {
                 // gets the inverse of "i" mod 128 from the BigInteger class method of modInverse
@@ -69,17 +70,12 @@ public class Decryption {
                     // updates the decryption each iteration
                     fully_decrypted = decryption_algo();
                     // updates the strings of bits to compare
-                    curBinaryStringRep = affine.create_binary_lines(fully_decrypted, 1);
+                    curBinaryStringRep = affine.create_binary_lines(fully_decrypted);
                     // compares both current string representation of binary to library
-                    for (int k = 0; k < curBinaryStringRep.size(); k++) {
-                        for (String cur : curBinaryStringRep) {
-                            if (cur.contains(affine.getDictionary_values().get(k))) {
-                                legible_words++;
-//                                System.out.printf("True for bytes: %s\n", affine.getDictionary_values().get(k));
-//                                System.out.printf("A = %d\tB = %d\n", affine.getKeyPair().a, affine.getKeyPair().b);
-                            }
+                    for (String cur : curBinaryStringRep) {
+                        if (affine.getDictionary_values().contains(cur)) {
+                            legible_words++;
                         }
-                        // TODO finish, almost complete NEED TO FIX
                     }
                     // If the words found is greater than max already
                     if (legible_words > max_legible_words) {
@@ -89,6 +85,7 @@ public class Decryption {
                 }
             }
         }
+        // Sets final best key pair to affine's key pair
         affine.getKeyPair().setKeyPair(bestPair.a, bestPair.b);
         System.out.printf("A = %d\tB = %d\n", bestPair.a, bestPair.b);
         System.out.println(max_legible_words);

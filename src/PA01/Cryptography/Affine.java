@@ -18,7 +18,6 @@ import java.util.ArrayList;
  * @version 02/07/2023
  */
 public class Affine {
-
     public final int MOD_128 = 128;
     public final int EN_DE_ARG_LENGTH = 5;
     public final int CIPHER_ARG_LENGTH = 4;
@@ -78,6 +77,8 @@ public class Affine {
                 decryption.decryption_brute_force_key();
                 byte[] fully_decrypted = decryption.decryption_algo();
                 // writes fully decrypted bytes to file
+                affine.out.write((affine.key_pair.a.intValue() + " " + affine.key_pair.b.intValue() + "\n").getBytes());
+                affine.out.write("DECIPHERED MESSAGE:\n".getBytes());
                 affine.out.write(fully_decrypted);
             } else {
                 throw new Exception();
@@ -85,7 +86,8 @@ public class Affine {
             affine.out.close();
         } catch (Exception e) {
             if (e.getClass().equals(IllegalArgumentException.class)) {
-                System.err.println(affine.key_pair.a.intValue() + " is not co-prime with 128");
+                System.err.println(affine.key_pair.a.intValue() + " is not co-prime with 128 OR "
+                        + affine.key_pair.b.intValue() + " is not greater than 0 and less than 129");
             } else {
                 affine.err();
             }
@@ -112,7 +114,8 @@ public class Affine {
             key_pair = new KeyPair(new BigInteger(args[affine.A_INDEX]).abs(),
                     new BigInteger(args[affine.B_INDEX]).abs());
             // Checks to see if a value is within limits of mod 128
-            if (key_pair.a.gcd(new BigInteger("128")).intValue() != 1) {
+            if (key_pair.a.gcd(new BigInteger("128")).intValue() != 1 || key_pair.b.intValue() < 0
+                    || key_pair.b.intValue() >= 129) {
                 throw new IllegalArgumentException();
             }
             // If mode is decipher it creates a blank key pair and saves the dictionary file as a Byte[] array
@@ -121,7 +124,7 @@ public class Affine {
             File dictionary_file = new File(args[affine.DICTIONARY_INDEX]);
             BufferedInputStream dict_in = new BufferedInputStream(new FileInputStream(dictionary_file));
             // Reads all bytes from dictionary file and converts from byte[] to strings for future processing
-            dictionary_values = create_binary_lines(dict_in.readAllBytes(), 0);
+            dictionary_values = create_binary_lines(dict_in.readAllBytes());
             dict_in.close();
         }
     }
@@ -172,18 +175,19 @@ public class Affine {
      * @param bytes to use
      * @return ArrayList to return
      */
-    public ArrayList<String> create_binary_lines(byte[] bytes, int includeNewLineChar) {
+    public ArrayList<String> create_binary_lines(byte[] bytes) {
         // Reads all bytes from bytes and converts from byte[] to strings for future processing
         StringBuilder curBytesOfWord = new StringBuilder();
         ArrayList<String> string_of_bytes = new ArrayList<>();
         for (byte cur : bytes) {
-            // values 10 and 13 in ASCII are treated as new line characters
-            if (cur == 10 || cur == 13) {
-                // Includes or doesn't include new line char
-                if (includeNewLineChar == 1) {
-                    curBytesOfWord.append(cur);
+            // after certain ASCII values that are not numbers or characters the string will be added to the arraylist
+            if (cur >= 0 && cur <= 44 || cur >= 58 && cur <= 64 || cur >= 91 && cur <= 96 || cur >= 123 && cur < 127) {
+                // largest average of any language is 12 chars(from what I gathered) and I wanted to not include words
+                // shorter than 3 characters.  There are length 3 decimal values for lower case letters.  Hence, my
+                // final values.
+                if (curBytesOfWord.length() < 36 && curBytesOfWord.length() > 9) {
+                    string_of_bytes.add(curBytesOfWord.toString());
                 }
-                string_of_bytes.add(curBytesOfWord.toString());
                 curBytesOfWord = new StringBuilder();
             } else {
                 curBytesOfWord.append(cur);
