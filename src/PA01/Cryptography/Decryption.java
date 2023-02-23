@@ -1,8 +1,7 @@
 package PA01.Cryptography;
 
 import java.math.BigInteger;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.HashSet;
 
 /**
  * Used to do the decryption of an Affine_Cipher file.
@@ -57,9 +56,8 @@ public class Decryption {
         int legible_words;
         int max_legible_words = 0;
         KeyPair bestPair = new KeyPair(null, null);
-        ArrayList<String> curBinaryStringRep;
+        HashSet<String> curBinaryStringRep;
         for (int i = 0; i < affine.MOD_128; i++) {
-            System.out.println(i);
             // Checks if the value of "i" is relatively prime to 128
             if (new BigInteger("" + i).gcd(new BigInteger("" + affine.MOD_128)).intValue() == 1) {
                 // gets the inverse of "i" mod 128 from the BigInteger class method of modInverse
@@ -87,8 +85,10 @@ public class Decryption {
         }
         // Sets final best key pair to affine's key pair
         affine.getKeyPair().setKeyPair(bestPair.a, bestPair.b);
-        System.out.printf("A = %d\tB = %d\n", bestPair.a, bestPair.b);
-        System.out.println(max_legible_words);
+        System.out.printf("Key set found contains A = %d and B = %d.\n", bestPair.a, bestPair.b);
+        System.out.println(max_legible_words + " words were found to be legible with this key set " +
+                "while ignoring words < 4 characters and words > 12 characters.");
+        System.out.println("Please review your output file for the full decipher.");
     }
 }
 

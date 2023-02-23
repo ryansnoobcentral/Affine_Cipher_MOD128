@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="CS327 Coding Projects:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/CS327_Coding_Projects_jar</output-path>
+    <root id="archive" name="CS327 Coding Projects.jar">
+      <element id="module-output" name="CS327_Coding_Projects" />
+    </root>
+  </artifact>
+</component>
