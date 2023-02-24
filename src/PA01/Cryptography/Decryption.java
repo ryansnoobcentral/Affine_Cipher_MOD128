@@ -86,8 +86,7 @@ public class Decryption {
         // Sets final best key pair to affine's key pair
         affine.getKeyPair().setKeyPair(bestPair.a, bestPair.b);
         System.out.printf("Key set found contains A = %d and B = %d.\n", bestPair.a, bestPair.b);
-        System.out.println(max_legible_words + " words were found to be legible with this key set " +
-                "while ignoring words < 4 characters and words > 12 characters.");
+        System.out.println(max_legible_words + " words were found to be legible with this key set.");
         System.out.println("Please review your output file for the full decipher.");
     }
 }

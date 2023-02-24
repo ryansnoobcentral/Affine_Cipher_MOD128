@@ -94,8 +94,10 @@ public class Affine {
             affine.out.close();
         } catch (Exception e) {
             if (e.getClass().equals(IllegalArgumentException.class)) {
-                System.err.println(affine.key_pair.a.intValue() + " is not co-prime with 128 OR "
-                        + affine.key_pair.b.intValue() + " is not >= 0 and not < 128");
+                System.err.println("The key pair (" + affine.key_pair.a.intValue() + ", " +
+                        affine.key_pair.b.intValue() + ") is invalid, please select another key.");
+                System.err.println(affine.key_pair.a.intValue() + " is either not co-prime with 128 OR "
+                        + affine.key_pair.b.intValue() + " is either not >= 0 and not < 128");
             } else {
                 affine.err();
             }
@@ -146,6 +148,10 @@ public class Affine {
                 Example Commands: "encrypt [plaintext-file] [output-file] [a] [b]"
                                   "decrypt [ciphertext-file] [output-file] [a] [b]"
                                   "decipher [ciphertext-file] [output-file] [dictionary-file]"
+                Detailed Example Commands:
+                                  "java -jar CS327_Coding_Projects.jar encrypt testIN.txt testOUT.txt 73 120"
+                                  "java -jar CS327_Coding_Projects.jar decrypt testOUT.txt testOUTreverted.txt 73 120"
+                                  "java -jar CS327_Coding_Projects.jar decipher testOUT.txt testOUTreverted.txt words.txt"
                 """);
     }
 
@@ -190,12 +196,7 @@ public class Affine {
         for (byte cur : bytes) {
             // after certain ASCII values that are not numbers or characters the string will be added to the arraylist
             if (cur >= 0 && cur <= 44 || cur >= 58 && cur <= 64 || cur >= 91 && cur <= 96 || cur >= 123 && cur < 127) {
-                // largest average of any language is 12 chars(from what I gathered) and I wanted to not include words
-                // shorter than 3 characters.  There are length 3 decimal values for lower case letters.  Hence, my
-                // final values.  This helps with the run time of the total program.
-                if (curBytesOfWord.length() < 36 && curBytesOfWord.length() > 9) {
-                    string_of_bytes.add(curBytesOfWord.toString());
-                }
+                string_of_bytes.add(curBytesOfWord.toString());
                 curBytesOfWord = new StringBuilder();
             } else {
                 curBytesOfWord.append(cur);
